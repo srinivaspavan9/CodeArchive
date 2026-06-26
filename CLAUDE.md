@@ -98,6 +98,19 @@ Look at new or changed files in `problems/` and, for each:
    - Examples: `dynamic_programming_chess_games_problem.py`, `hashmap_two_sum.py`,
      `dfs_course_schedule.py`.
 
+   **NeetCode 150 problems get a `neetcode150_` prefix** so they can be told apart
+   from other problems at a glance. The full form is:
+
+   ```
+   neetcode150_<optimal_approach>_<problem_context>.py
+   ```
+
+   - Example: `neetcode150_linear_scan_insert_interval.py`.
+   - The unsolved variant follows the same idea: `neetcode150_unsolved_<problem_context>.py`.
+   - Identify a NeetCode 150 problem when the user says so, or when the file's problem
+     statement mentions NeetCode 150. Non-NeetCode problems keep the plain convention
+     (no prefix).
+
 2. **Tidy the problem statement** at the top (keep it as a comment block / docstring).
    Fix obvious formatting but preserve the user's wording. If a source link exists, keep it.
 

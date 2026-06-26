@@ -10,6 +10,7 @@ Click a file to jump straight to it. Status: ✅ Solved · ❌ Unsolved (questio
 |---------|--------|------------------|------|
 | Chess tournament ranks | ✅ Solved | DFS | [dfs_chess_tournament_ranks.py](problems/dfs_chess_tournament_ranks.py) |
 | Maximum score stone jumps | ❌ Unsolved | — | [unsolved_max_score_stone_jumps.py](problems/unsolved_max_score_stone_jumps.py) |
+| Insert Interval (NeetCode 150) | ✅ Solved | Linear scan | [neetcode150_linear_scan_insert_interval.py](problems/neetcode150_linear_scan_insert_interval.py) |
 
 ## Layout
 

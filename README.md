@@ -4,11 +4,11 @@ Personal archive of coding problems I solve — kept so I don't forget them.
 
 ## Index
 
-Click a file to jump straight to it.
+Click a file to jump straight to it. Status: ✅ Solved · ❌ Unsolved (question only, to do later).
 
-| Problem | Optimal approach | File |
-|---------|------------------|------|
-| Chess tournament ranks | DFS | [dfs_chess_tournament_ranks.py](problems/dfs_chess_tournament_ranks.py) |
+| Problem | Status | Optimal approach | File |
+|---------|--------|------------------|------|
+| Chess tournament ranks | ✅ Solved | DFS | [dfs_chess_tournament_ranks.py](problems/dfs_chess_tournament_ranks.py) |
 
 ## Layout
 

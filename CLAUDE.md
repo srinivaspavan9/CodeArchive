@@ -25,6 +25,31 @@ if it seems convenient or the user is in a hurry.
 4. The user confirms, then **the user** runs the git/push commands themselves.
    See the HARD RULE above — never run git/push yourself.
 
+## Unsolved problems (parked for later)
+
+Sometimes the user adds a file that is **just the question, with no solution** — they'll
+say something like "added a new file, will solve it later". Such a file has no code to
+analyze, so handle it differently from a solved one:
+
+- **Do NOT fabricate anything.** No approach labels, no optimality analysis, no
+  `AI (Claude) SOLUTION` block. There is nothing solved yet — don't pre-empt it.
+- **Still tidy the problem statement** at the top (same as normal).
+- **Filename:** since there's no optimal approach yet, use **`unsolved_<problem_context>.py`**
+  (e.g. `unsolved_two_sum.py`) instead of the `<optimal_approach>_<context>.py` form.
+- **README index:** add the row with **Status = ❌ Unsolved** and the Optimal-approach
+  cell as `—`.
+- **`problem_context.md`:** add the row as usual; note in the Context that it's unsolved
+  (question only).
+
+**When the user later solves it** (e.g. "I solved that one" / "added the solution"):
+flip everything to the solved form — run the FULL normal cleanup (labels, optimality,
+optional AI block), **rename** `unsolved_<context>.py` → `<optimal_approach>_<context>.py`,
+flip the README Status to ✅ Solved and fill in the optimal approach, and update the
+`problem_context.md` row (and path).
+
+If the user doesn't say whether it's solved, infer from the file: only a question/comments
+and no real solution code ⇒ treat as unsolved.
+
 ## Editing an existing file / adding a new approach
 
 The user won't always add a brand-new problem — sometimes they **edit an existing file**,
@@ -131,10 +156,12 @@ Look at new or changed files in `problems/` and, for each:
    working code, or strip their notes unless explicitly asked. Keep edits minimal.
 
 5. **Update the README index.** `README.md` has an `## Index` table
-   (`Problem | Optimal approach | File`). Add one row for the new problem, with the File
-   cell as a clickable relative link, e.g.
-   `[dfs_course_schedule.py](problems/dfs_course_schedule.py)`. This is the user's
-   clickable index of everything archived — keep it current on every new problem.
+   (`Problem | Status | Optimal approach | File`). Add one row for the new problem, with
+   the File cell as a clickable relative link, e.g.
+   `[dfs_course_schedule.py](problems/dfs_course_schedule.py)`. Status is ✅ Solved or
+   ❌ Unsolved (see the Unsolved-problems section); for unsolved, Optimal approach is `—`.
+   This is the user's clickable index of everything archived — keep it current on every
+   new problem and flip Status when an unsolved one gets solved.
 
 6. **Update `problem_context.md`.** Add (or update) the file's row in the context lookup
    table — `File | Context`, with a keyword-rich 2-3 line description of the problem's

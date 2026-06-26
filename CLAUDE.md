@@ -25,6 +25,34 @@ if it seems convenient or the user is in a hurry.
 4. The user confirms, then **the user** runs the git/push commands themselves.
    See the HARD RULE above — never run git/push yourself.
 
+## Editing an existing file / adding a new approach
+
+The user won't always add a brand-new problem — sometimes they **edit an existing file**,
+e.g. "I edited a file", "added a new approach to that problem", or they just describe a
+problem and say they changed it. You then do the cleanup for the changed file.
+
+**You do NOT need the user to give the exact filename.** Figure out which file they mean:
+
+1. **Consult `problem_context.md` first.** It's a keyword-rich context lookup table
+   (file → 2-3 line description of the problem's real-world subject). Match the user's
+   description ("the chess rank one") against the Context column to find candidate files,
+   then **confirm the exact filename with the user** before editing.
+2. If the context table doesn't resolve it, match against the actual files in `problems/`
+   or find the **most recently modified** one (`ls -lt problems/`), open it, and confirm.
+3. If it's still ambiguous (e.g. several files touched), **ask which one** before editing.
+
+Use the context table, modification times, and file contents to detect changes — do **not**
+lean on git for this (stay clear of the user's git workflow per the HARD RULE).
+
+When a new approach was added to an existing file, on top of the normal cleanup below:
+
+- **Re-judge optimality across ALL approaches now in the file**, not just the new one.
+- If the newly added approach is now the optimal one, the filename's `<optimal_approach>`
+  prefix may be wrong — **rename the file** accordingly and **update its row in the README
+  index** to match.
+- If the user has now written the optimal approach themselves, **remove any earlier
+  `AI (Claude) SOLUTION` block** you had added — it's redundant now.
+
 ## What you do when a problem is added/finished
 
 Look at new or changed files in `problems/` and, for each:
@@ -108,7 +136,14 @@ Look at new or changed files in `problems/` and, for each:
    `[dfs_course_schedule.py](problems/dfs_course_schedule.py)`. This is the user's
    clickable index of everything archived — keep it current on every new problem.
 
-6. **Report, don't push.** Tell the user the final filename and show how the file
+6. **Update `problem_context.md`.** Add (or update) the file's row in the context lookup
+   table — `File | Context`, with a keyword-rich 2-3 line description of the problem's
+   real-world subject, its input, the approaches used, and which is optimal. This is the
+   table you consult to find a file from a vague description, so keep it current on every
+   new problem AND whenever an existing file's approaches/optimal verdict change. If a
+   file is renamed, update its path here too.
+
+7. **Report, don't push.** Tell the user the final filename and show how the file
    now looks. Wait for their confirmation. They handle git.
 
 ## File anatomy (target shape)
@@ -133,4 +168,4 @@ def ...
 ## Structure
 
 - One folder: `problems/`. Everything lives flat inside it. Do not create subfolders.
-- Root holds only `README.md`, `CLAUDE.md`, `.gitignore`.
+- Root holds only `README.md`, `CLAUDE.md`, `problem_context.md`, `.gitignore`.

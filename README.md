@@ -2,6 +2,14 @@
 
 Personal archive of coding problems I solve — kept so I don't forget them.
 
+## Index
+
+Click a file to jump straight to it.
+
+| Problem | Optimal approach | File |
+|---------|------------------|------|
+| Chess tournament ranks | DFS | [dfs_chess_tournament_ranks.py](problems/dfs_chess_tournament_ranks.py) |
+
 ## Layout
 
 Everything lives flat in [`problems/`](problems/). The **filename is the structure**:

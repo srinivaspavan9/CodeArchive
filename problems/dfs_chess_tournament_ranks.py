@@ -88,6 +88,20 @@ given n players there should be n ranks
 
 
 
+# ============================================================
+# Approach: DFS over win/loss graphs  —  O(n * (n + m)) time, O(n + m) space
+# For each player count who they transitively beat (wins) and who transitively beats
+# them (loss). If wins + loss == n - 1 they're comparable to everyone, so rank = loss + 1.
+#
+# Optimality: this is essentially optimal for the problem. It computes transitive
+# reachability (which the problem inherently needs) and beats the naive Floyd-Warshall
+# transitive closure O(n^3) on sparse graphs. Only a constant-factor improvement remains
+# — a bitset transitive closure over a topological order — and it only helps when the
+# graph is dense. Verdict: keep this; correct and near-optimal.
+# ============================================================
+from collections import defaultdict
+
+
 def countPlayers(player, graph, visited):
     count = 0
     for oppnt in graph[player]:

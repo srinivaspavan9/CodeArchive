@@ -9,6 +9,7 @@ Click a file to jump straight to it. Status: ✅ Solved · ❌ Unsolved (questio
 | Problem | Status | Optimal approach | File |
 |---------|--------|------------------|------|
 | Chess tournament ranks | ✅ Solved | DFS | [dfs_chess_tournament_ranks.py](problems/dfs_chess_tournament_ranks.py) |
+| Maximum score stone jumps | ❌ Unsolved | — | [unsolved_max_score_stone_jumps.py](problems/unsolved_max_score_stone_jumps.py) |
 
 ## Layout
 

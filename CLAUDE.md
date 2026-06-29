@@ -76,7 +76,7 @@ When a new approach was added to an existing file, on top of the normal cleanup 
   prefix may be wrong — **rename the file** accordingly and **update its row in the README
   index** to match.
 - If the user has now written the optimal approach themselves, **remove any earlier
-  `AI (Claude) SOLUTION` block** you had added — it's redundant now.
+  `AI (Claude) NOTES` block** you had added — it's redundant now.
 
 ## What you do when a problem is added/finished
 
@@ -89,10 +89,12 @@ Look at new or changed files in `problems/` and, for each:
    ```
 
    - all lowercase **snake_case**, single underscores between words.
-   - `<optimal_approach>` = the *best/optimal* technique for the problem
+   - `<optimal_approach>` = the best/optimal technique **the user themselves wrote**
      (e.g. `dynamic_programming`, `hashmap`, `dfs`, `two_pointers`, `binary_search`).
-     Use this even if the file also contains a brute-force or other approaches inside —
-     the filename advertises the optimal one.
+     Use the user's own best approach even if the file also contains a brute-force or
+     other approaches inside — the filename advertises the user's optimal one. Do NOT
+     name the file after a faster technique the user didn't write (e.g. one you only
+     describe in notes); the filename reflects what the user actually coded.
    - `<problem_context>` = a short descriptive name of the problem
      (e.g. `chess_games_problem`, `two_sum`, `course_schedule`).
    - Examples: `dynamic_programming_chess_games_problem.py`, `hashmap_two_sum.py`,
@@ -138,27 +140,29 @@ Look at new or changed files in `problems/` and, for each:
      multiple approaches, mark which is genuinely best; if even the best is suboptimal,
      state what the optimal approach would be even if they didn't write it.
 
-   **If the user's best solution is suboptimal, ADD the optimal approach in full.** Don't
-   just describe it in prose — append a new block containing the actual optimal code
-   (working Python, or clear pseudocode if a full impl is impractical), with its technique
-   name and complexity, so the user can study and compare it later. This is additive (it
-   never touches the user's own code — see rule 4).
+   **If the user's best solution is suboptimal, describe the faster approach in NOTES —
+   do NOT write the code.** The user revises by re-implementing it themselves, so writing
+   the optimal solution for them defeats the purpose. Instead append a comment-only block
+   explaining the faster approach in plain, easy-to-understand language: the key insight,
+   why it's faster, its technique name and complexity, and concrete implementation hints —
+   but no actual Python/pseudocode solution. This is additive (it never touches the user's
+   own code — see rule 4).
 
-   **Always place this added solution at the END of the file, and explicitly fence it as
+   **Always place these notes at the END of the file, and explicitly fence them as
    Claude's/AI's contribution with a clear marker at BOTH the top and the bottom**, so it's
-   unmistakable which code is the user's and which was added by the AI:
+   unmistakable which notes are the user's and which were added by the AI:
 
    ```python
-   # ===================== AI (Claude) SOLUTION — START =====================
-   # Approach (OPTIMAL — added by Claude): Hash map  —  O(n) time, O(n) space
-   # The user's solution above is O(n^2); this is the faster way to do it.
-   # =======================================================================
-   def ...
-
-   # ====================== AI (Claude) SOLUTION — END ======================
+   # ================== AI (Claude) NOTES — START ==================
+   # (Hints only — no code on purpose, so you can implement it yourself on revision.)
+   # FASTER APPROACH: Hash map  —  O(n) time, O(n) space
+   # ===============================================================
+   # The user's solution above is O(n^2). Key idea: <plain-language explanation of the
+   # faster technique and how to build it>. No code here by design.
+   # =================== AI (Claude) NOTES — END ===================
    ```
 
-   If the user's own solution is already optimal, no extra block is needed — just say so.
+   If the user's own solution is already optimal, no notes block is needed — just say so.
 
 4. **Additive only — never delete or rewrite what the user already wrote.** The user's
    files usually contain scratch notes, worked examples, and random thought-process

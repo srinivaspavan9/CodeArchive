@@ -125,7 +125,7 @@ def maxScoreStoneJumps(stones):
 # dp[j] = max over i<j of dp[i] + (j-i)*stones[j]. Cleaner than approach 1 (no
 # recursion), but the same complexity. The "# dp - O(n)" label just below is
 # wrong: the nested i-loop makes this O(n^2). The genuine O(n log n) optimum is
-# in the AI block at the end of the file.
+# described in the AI notes at the end of the file.
 
 # dp - O(n)
 
@@ -151,78 +151,37 @@ def maxScoreStoneJumps(stones):
 	return dp[n-1]
 
 
-# ===================== AI (Claude) SOLUTION — START =====================
-# Approach 3 (OPTIMAL — added by Claude): Convex Hull Trick via Li Chao tree
-#   —  O(n log V) time, O(n) space   (V = max stone value)
-#
-# Both DP solutions above are O(n^2). The recurrence rearranges so each dp[j]
-# is a maximum over straight lines evaluated at a single point:
+# ================== AI (Claude) NOTES — START ==================
+# (Hints only — no code on purpose, so you can implement it yourself on revision.)
+# FASTER APPROACH: Convex Hull Trick / Li Chao tree  —  O(n log n) time, O(n) space
+# ===============================================================
+# Both DP solutions above are O(n^2). You can get below that by noticing the
+# recurrence is a max over straight lines:
 #
 #   dp[j] = max_{i<j} ( dp[i] + (j - i) * stones[j] )
 #         = j*stones[j] + max_{i<j} ( dp[i] - i*stones[j] )
 #
-# Treat each earlier index i as a line  f_i(x) = (-i)*x + dp[i]
-# (slope -i, intercept dp[i]). Then dp[j] = j*stones[j] + max_i f_i(stones[j]) —
-# i.e. query the upper envelope of those lines at x = stones[j]. A Li Chao tree
-# maintains that envelope with O(log V) insert/query, so the whole thing is
-# O(n log V). (A monotonic-slope CHT with binary-search queries is O(n log n).)
-# This isn't test-run here; it follows the same recurrence as the DP above by
-# construction — the only change is HOW the inner max is computed.
-
-class _LiChaoNode:
-    __slots__ = ('m', 'b', 'left', 'right', 'has')
-    def __init__(self):
-        self.m = 0; self.b = 0
-        self.left = None; self.right = None
-        self.has = False
-
-def _insert(node, lo, hi, m, b):
-    if not node.has:
-        node.m, node.b, node.has = m, b, True
-        return
-    mid = (lo + hi) // 2
-    left_better = m * lo + b > node.m * lo + node.b
-    mid_better = m * mid + b > node.m * mid + node.b
-    if mid_better:                       # keep the better line at this node
-        node.m, node.b, m, b = m, b, node.m, node.b
-    if lo == hi:
-        return
-    if left_better != mid_better:        # the loser still wins on the left half
-        if node.left is None:
-            node.left = _LiChaoNode()
-        _insert(node.left, lo, mid, m, b)
-    else:                                # ... otherwise on the right half
-        if node.right is None:
-            node.right = _LiChaoNode()
-        _insert(node.right, mid + 1, hi, m, b)
-
-def _query(node, lo, hi, x):
-    if node is None or not node.has:
-        return float('-inf')
-    res = node.m * x + node.b
-    if lo == hi:
-        return res
-    mid = (lo + hi) // 2
-    if x <= mid:
-        return max(res, _query(node.left, lo, mid, x))
-    return max(res, _query(node.right, mid + 1, hi, x))
-
-def maxScoreStoneJumps_optimal(stones):
-    if not stones:
-        return 0
-    n = len(stones)
-    if n == 1:
-        return 0
-    lo, hi = 0, max(stones)
-    root = _LiChaoNode()
-    dp = [0] * n
-    _insert(root, lo, hi, 0, dp[0])          # i = 0: slope 0, intercept dp[0]=0
-    for j in range(1, n):
-        best = _query(root, lo, hi, stones[j])
-        dp[j] = stones[j] * j + best
-        _insert(root, lo, hi, -j, dp[j])     # add the line for index j
-    return dp[n - 1]
-
-# ====================== AI (Claude) SOLUTION — END ======================
+# Read that inner max as: each earlier index i defines a LINE
+#       f_i(x) = (-i) * x + dp[i]        (slope = -i, intercept = dp[i])
+# and for index j you evaluate every such line at the single point x = stones[j]
+# and take the maximum. So dp[j] = j*stones[j] + (best line value at x=stones[j]).
+#
+# The whole job becomes: "keep a set of lines, support (a) add a line, and
+# (b) ask for the max value of any line at a given x." That's exactly what the
+# Convex Hull Trick answers. The set of lines forms an upper envelope; querying
+# the best line at a point is O(log n).
+#
+# Implementation hints (so you can build it from scratch):
+#   - Process j = 0, 1, ..., n-1 in order. Before computing dp[j], all lines for
+#     i < j are already inserted, so a query at x = stones[j] is valid.
+#   - A Li Chao tree (segment-tree-like, keyed on the x range [0 .. max(stones)])
+#     is the easiest correct structure: each node stores the line that's best at
+#     its midpoint, and you recurse left/right to fix the rest. Both insert and
+#     query are O(log V).
+#   - Alternatively, since the slopes -i are added in strictly decreasing order,
+#     a monotonic-deque CHT works too, with a binary search per query → O(n log n).
+#   - Sanity check while coding: it must produce the SAME dp values as Approach 2
+#     above — only the way you compute the inner max changes.
+# =================== AI (Claude) NOTES — END ===================
 
 

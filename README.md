@@ -13,6 +13,7 @@ Click a file to jump straight to it. Status: ✅ Solved · ❌ Unsolved (questio
 | Insert Interval (NeetCode 150) | ✅ Solved | Linear scan | [neetcode150_linear_scan_insert_interval.py](problems/neetcode150_linear_scan_insert_interval.py) |
 | Merge Intervals (NeetCode 150) | ✅ Solved | Sort + linear merge | [neetcode150_sorting_merge_intervals.py](problems/neetcode150_sorting_merge_intervals.py) |
 | Maximum Subarray (NeetCode 150) | ✅ Solved | Kadane's algorithm | [neetcode150_kadane_maximum_subarray.py](problems/neetcode150_kadane_maximum_subarray.py) |
+| Number of islands in a tree | ❌ Unsolved | — | [unsolved_number_of_islands_in_tree.py](problems/unsolved_number_of_islands_in_tree.py) |
 
 ## Layout
 

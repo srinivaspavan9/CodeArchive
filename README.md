@@ -4,7 +4,7 @@ Personal archive of coding problems I solve — kept so I don't forget them.
 
 ## Index
 
-Click a file to jump straight to it. Status: ✅ Solved · ❌ Unsolved (question only, to do later).
+Click a file to jump straight to it. Status: ✅ Solved · ⚠️ Partial (multi-problem file, some rounds unsolved) · ❌ Unsolved (question only, to do later).
 
 | Problem | Status | Optimal approach | File |
 |---------|--------|------------------|------|
@@ -14,6 +14,8 @@ Click a file to jump straight to it. Status: ✅ Solved · ❌ Unsolved (questio
 | Merge Intervals (NeetCode 150) | ✅ Solved | Sort + linear merge | [neetcode150_sorting_merge_intervals.py](problems/neetcode150_sorting_merge_intervals.py) |
 | Maximum Subarray (NeetCode 150) | ✅ Solved | Kadane's algorithm | [neetcode150_kadane_maximum_subarray.py](problems/neetcode150_kadane_maximum_subarray.py) |
 | Number of islands in a tree | ✅ Solved | Union-Find (disjoint set) | [union_find_number_of_islands_in_tree.py](problems/union_find_number_of_islands_in_tree.py) |
+| Social graph (friends & mutuals) | ✅ Solved | Hash map + adjacency sets | [hashmap_social_graph.py](problems/hashmap_social_graph.py) |
+| Interview writeup (4 rounds) | ⚠️ Partial | DP + topological sort (2 of 4 solved) | [interview_rounds_dp_topo.py](problems/interview_rounds_dp_topo.py) |
 
 ## Layout
 

@@ -16,6 +16,7 @@ Click a file to jump straight to it. Status: ✅ Solved · ⚠️ Partial (multi
 | Number of islands in a tree | ✅ Solved | Union-Find (disjoint set) | [union_find_number_of_islands_in_tree.py](problems/union_find_number_of_islands_in_tree.py) |
 | Social graph (friends & mutuals) | ✅ Solved | Hash map + adjacency sets | [hashmap_social_graph.py](problems/hashmap_social_graph.py) |
 | Interview writeup (4 rounds) | ⚠️ Partial | DP + topological sort (2 of 4 solved) | [interview_rounds_dp_topo.py](problems/interview_rounds_dp_topo.py) |
+| Longest increasing path in a matrix (LC 329) | ✅ Solved | DFS + memoization | [dfs_memo_longest_increasing_path.py](problems/dfs_memo_longest_increasing_path.py) |
 
 ## Layout
 
